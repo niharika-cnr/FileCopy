@@ -13,12 +13,30 @@
 #define WRITE_END 1
 
 
-int main(){
+int main(int argc, char **argv){
 	char write_msg[BUFFER_SIZE] = "Greetings\n";
 	char read_msg [BUFFER_SIZE];
+	char ch;
 
 	int fd[2];
 	pid_t cpid;
+	
+	char *sourceFile = argv[1];
+	char *targetFile = argv[2];
+	
+	FILE *trgt = fopen(targetFile,"w");
+	FILE *src  = fopen(sourceFile,"r");
+	
+	printf("\n %s %s \n\n",sourceFile,targetFile);
+	
+	while (1) {
+      ch = fgetc(fp1);
+ 
+      if (ch == EOF)
+         break;
+      else
+         putc(ch, fp2);
+   }
 	
 	pipe(fd); /* create pipe */
 	if((cpid = fork()) == -1){
@@ -31,6 +49,7 @@ int main(){
 		close(fd[WRITE_END]);
 		/* read from the pipe */
 		read(fd[READ_END], read_msg, BUFFER_SIZE);
+		read(
 		printf("read: %s",read_msg);
 		/* close the write end of the pipe */
 		close(fd[READ_END]);
@@ -52,4 +71,3 @@ int main(){
 
 	return 0;
 }
-
