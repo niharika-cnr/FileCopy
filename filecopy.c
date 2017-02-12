@@ -1,8 +1,10 @@
-/*	Name:			Niharika CNR
-	ID: 			1510110234
-	Teammate name:	Sanjana Gautam
-	Team Number: 	9
-*/
+/*	
+ *	Name:		Niharika CNR
+ *	ID: 		1510110234
+ *	Teammate name:	Sanjana Gautam
+ *	Team Number: 	9
+ */
+
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/types.h>
@@ -43,7 +45,7 @@ int main(int argc, char **argv)	{
 		exit(1);
 	}
 
-	// child process: child only READS
+	// child process execution logic: child only READS
 	if(cpid==0){
 		/* close the unused end of the pipe */
 		close(fd[WRITE_END]);
@@ -57,9 +59,7 @@ int main(int argc, char **argv)	{
 			read(fd[READ_END], read_data, MAX_SIZE);
 			fprintf(trgt,"%s",read_data);
 			
-			printf("\nContents of %s have been copied into %s\n
-
-\n",sourceFileName,targetFileName);
+			printf("\nContents of %s have been copied into %s\n\n",sourceFileName,targetFileName);
 		}//end if
 		
 		/* Print error message if the target file does not exist */
@@ -71,7 +71,7 @@ int main(int argc, char **argv)	{
 
 	}
 	
-	//parent process execution: parent only WRITES	
+	//parent process execution logic: parent only WRITES	
 	else{
 		/* close the unused end of the pipe */
 		close(fd[READ_END]);
@@ -83,9 +83,12 @@ int main(int argc, char **argv)	{
 		if(src!=NULL)	{
 			while(1)	{
 				ch = fgetc(src);
-						 
+				
+				/*end the writing process if we reach the END OF FILE or
+				  if we reach the MAXIMUM LIMIT of data allowed */
 				if ( (ch==EOF) || i==MAX_SIZE )
 				   break;
+				//writes data into pipe one character at a time
 				else
 				   write_data[i++]=ch;
 			}//end while
