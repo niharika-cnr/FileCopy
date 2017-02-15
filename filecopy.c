@@ -32,16 +32,11 @@ int main(int argc, char **argv)	{
 
 	int fd[2];
 	pid_t cpid;
-    
-    if(strcmp(argv[1], "filecopy"))   {
-        printf("\nEnter the action to be performed: copyfile\n");
-        exit(1);
-    }
         
 
 	/* char*'s to store the names of the files passed as command line arguments*/
-	char *sourceFileName = argv[2];
-	char *targetFileName = argv[3];
+	char *sourceFileName = argv[1];
+	char *targetFileName = argv[2];
 	
 
 	pipe(fd); /* creates pipe */
