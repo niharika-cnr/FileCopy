@@ -1,6 +1,6 @@
 /*	
- *	Name:		Niharika CNR
- *	ID: 		1510110234
+ *	Name:		    Niharika CNR
+ *	ID: 		    1510110234
  *	Teammate name:	Sanjana Gautam
  *	Team Number: 	9
  */
@@ -12,7 +12,7 @@
 #include <string.h>
 
 
-#define MAX_SIZE 250
+#define MAX_SIZE 5000
 #define READ_END 0
 #define WRITE_END 1
 
@@ -32,10 +32,16 @@ int main(int argc, char **argv)	{
 
 	int fd[2];
 	pid_t cpid;
+    
+    if(strcmp(argv[1], "filecopy"))   {
+        printf("\nEnter the action to be performed: copyfile\n");
+        exit(1);
+    }
+        
 
 	/* char*'s to store the names of the files passed as command line arguments*/
-	char *sourceFileName = argv[1];
-	char *targetFileName = argv[2];
+	char *sourceFileName = argv[2];
+	char *targetFileName = argv[3];
 	
 
 	pipe(fd); /* creates pipe */
